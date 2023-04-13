@@ -1,0 +1,21 @@
+name: CI pipeline
+on:               # this is the pipeline trigger
+  pull_request:
+    branches:
+      - featurea
+    types: [opened]
+jobs:
+  startup:
+    name: Run startup script
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello world from the startup script"
+  build:
+    name: Build pipeline task   # display name
+    runs-on: ubuntu-latest      # runner
+    needs: startup
+    steps:
+      - run: gh pr comment $PR_URL --body "Thanks for your PR. We will review shortly"   # command line operation in linux environment: comment on the pull request saying "Thanks for your PR. We will review shortly"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_requests.html_url}}   # 
