@@ -1,8 +1,8 @@
 name: CI pipeline
 on:               # this is the pipeline trigger
   pull_request:
-    branches:
-      - featurea
+    # branches:
+    #   - featurea
     types: [opened]
 jobs:
   startup:
