@@ -13,7 +13,12 @@ jobs:
     runs-on: ubuntu-latest      # runner
     needs: startup
     steps:
-      - run: gh pr comment $PR_URL --body "Thanks for your PR. We will review shortly"   # command line operation in linux environment: comment on the pull request saying "Thanks for your PR. We will review shortly"
+      - name: Comment on PR
+        run: gh pr comment $PR_URL --body "Thanks for your PR. We will review shortly"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}   # 
+      - name: Check for buttons
+        run: ./.github/scripts/checker.sh
+        env:
+          FILE: ./src/components/Buttons.js
