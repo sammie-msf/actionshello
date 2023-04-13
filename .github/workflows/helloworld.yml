@@ -1,8 +1,6 @@
 name: CI pipeline
 on:               # this is the pipeline trigger
   pull_request:
-    branches:
-      - featurea
     types: [opened]
 jobs:
   startup:
@@ -18,4 +16,4 @@ jobs:
       - run: gh pr comment $PR_URL --body "Thanks for your PR. We will review shortly"   # command line operation in linux environment: comment on the pull request saying "Thanks for your PR. We will review shortly"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_requests.html_url}}   # 
+          PR_URL: ${{ github.event.pull_request.html_url }}   # 
